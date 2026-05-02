@@ -1,139 +1,113 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* AURUM — Premium furniture catalog design system.
-   All colors HSL. Dark charcoal canvas + bronze/gold accents. */
+/* Mueblería Tokio — Premium catalog design system.
+   All colors HSL. Slate/charcoal canvas + warm wood/bronze accents. */
 
 @layer base {
   :root {
-    /* Charcoal canvas */
-    --background: 220 14% 8%;
-    --foreground: 36 30% 92%;
+    /* Slate / charcoal canvas */
+    --background: 220 16% 9%;
+    --foreground: 36 30% 95%;
 
-    --surface: 220 13% 11%;
-    --surface-elevated: 220 12% 14%;
+    --surface: 220 14% 12%;
+    --surface-elevated: 220 13% 15%;
 
-    --card: 220 13% 11%;
-    --card-foreground: 36 30% 92%;
+    --card: 220 14% 12%;
+    --card-foreground: 36 30% 95%;
 
-    --popover: 220 13% 11%;
-    --popover-foreground: 36 30% 92%;
+    --popover: 220 14% 12%;
+    --popover-foreground: 36 30% 95%;
 
-    /* Bronze / gold accent */
-    --primary: 33 55% 56%;
+    /* Warm wood / bronze accent */
+    --primary: 30 60% 55%;
     --primary-foreground: 220 20% 8%;
-    --primary-glow: 38 70% 65%;
-    --primary-deep: 28 50% 38%;
+    --primary-glow: 36 75% 65%;
+    --primary-deep: 24 50% 38%;
 
-    --secondary: 220 10% 16%;
-    --secondary-foreground: 36 25% 88%;
+    --secondary: 220 12% 17%;
+    --secondary-foreground: 36 25% 90%;
 
-    --muted: 220 10% 14%;
-    --muted-foreground: 36 10% 62%;
+    --muted: 220 12% 15%;
+    --muted-foreground: 36 8% 65%;
 
-    --accent: 33 55% 56%;
+    --accent: 30 60% 55%;
     --accent-foreground: 220 20% 8%;
 
     --destructive: 0 70% 50%;
     --destructive-foreground: 36 30% 95%;
 
-    --border: 220 10% 18%;
-    --input: 220 10% 18%;
-    --ring: 33 55% 56%;
+    --border: 220 10% 19%;
+    --input: 220 10% 19%;
+    --ring: 30 60% 55%;
 
-    --radius: 0.25rem;
+    --radius: 0.5rem;
 
     /* Gradients */
-    --gradient-bronze: linear-gradient(135deg, hsl(33 60% 60%) 0%, hsl(28 55% 42%) 100%);
-    --gradient-overlay: linear-gradient(180deg, hsl(220 14% 6% / 0.3) 0%, hsl(220 14% 6% / 0.85) 100%);
-    --gradient-fade: linear-gradient(180deg, transparent 0%, hsl(220 14% 8%) 100%);
+    --gradient-bronze: linear-gradient(135deg, hsl(30 65% 60%) 0%, hsl(24 55% 42%) 100%);
+    --gradient-overlay: linear-gradient(180deg, hsl(220 16% 6% / 0.2) 0%, hsl(220 16% 6% / 0.85) 100%);
+    --gradient-fade: linear-gradient(180deg, transparent 0%, hsl(220 16% 9%) 100%);
 
     /* Shadows */
-    --shadow-elegant: 0 20px 60px -20px hsl(220 14% 2% / 0.7);
-    --shadow-glow: 0 0 40px -10px hsl(33 55% 56% / 0.45);
-    --shadow-soft: 0 8px 30px -10px hsl(220 14% 2% / 0.5);
+    --shadow-elegant: 0 24px 70px -20px hsl(220 16% 2% / 0.75);
+    --shadow-glow: 0 0 50px -12px hsl(30 60% 55% / 0.5);
+    --shadow-soft: 0 8px 30px -10px hsl(220 16% 2% / 0.55);
 
     /* Motion */
     --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
-    --transition-base: all 0.5s var(--ease-luxe);
 
-    /* Sidebar (unused but kept) */
-    --sidebar-background: 220 13% 10%;
-    --sidebar-foreground: 36 25% 88%;
-    --sidebar-primary: 33 55% 56%;
+    --sidebar-background: 220 14% 11%;
+    --sidebar-foreground: 36 25% 90%;
+    --sidebar-primary: 30 60% 55%;
     --sidebar-primary-foreground: 220 20% 8%;
-    --sidebar-accent: 220 10% 14%;
-    --sidebar-accent-foreground: 36 25% 88%;
-    --sidebar-border: 220 10% 18%;
-    --sidebar-ring: 33 55% 56%;
+    --sidebar-accent: 220 12% 15%;
+    --sidebar-accent-foreground: 36 25% 90%;
+    --sidebar-border: 220 10% 19%;
+    --sidebar-ring: 30 60% 55%;
   }
 
   .dark {
-    /* Same — site is permanently dark */
-    --background: 220 14% 8%;
-    --foreground: 36 30% 92%;
+    --background: 220 16% 9%;
+    --foreground: 36 30% 95%;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-feature-settings: "ss01", "cv11";
   }
-
-  h1, h2, h3, h4 {
-    @apply font-display tracking-tight;
-  }
+  h1, h2, h3, h4 { @apply font-display tracking-tight; }
 }
 
 @layer components {
   .container-luxe {
     @apply mx-auto w-full max-w-7xl px-6 md:px-10;
   }
-
   .eyebrow {
-    @apply inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-primary font-medium;
+    @apply inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-primary font-semibold;
   }
-
   .eyebrow::before {
     content: "";
     @apply h-px w-8 bg-primary;
   }
-
   .price-tag {
-    @apply font-display text-primary;
-    text-shadow: 0 0 30px hsl(var(--primary) / 0.25);
+    @apply font-display text-primary font-semibold;
+    text-shadow: 0 0 30px hsl(var(--primary) / 0.3);
   }
-
-  .hairline {
-    @apply h-px w-full bg-border;
-  }
-
-  .fade-in {
-    animation: fadeIn 0.8s var(--ease-luxe) both;
-  }
-
-  .fade-up {
-    animation: fadeUp 0.8s var(--ease-luxe) both;
-  }
+  .hairline { @apply h-px w-full bg-border; }
+  .fade-in { animation: fadeIn 0.7s var(--ease-luxe) both; }
+  .fade-up { animation: fadeUp 0.8s var(--ease-luxe) both; }
 }
 
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
-
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
