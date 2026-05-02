@@ -13,7 +13,28 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['"Cormorant Garamond"', 'serif'],
+      },
+      backgroundImage: {
+        'gradient-bronze': 'var(--gradient-bronze)',
+        'gradient-overlay': 'var(--gradient-overlay)',
+        'gradient-fade': 'var(--gradient-fade)',
+      },
+      boxShadow: {
+        elegant: 'var(--shadow-elegant)',
+        glow: 'var(--shadow-glow)',
+        soft: 'var(--shadow-soft)',
+      },
+      transitionTimingFunction: {
+        luxe: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      },
       colors: {
+        surface: {
+          DEFAULT: 'hsl(var(--surface))',
+          elevated: 'hsl(var(--surface-elevated))',
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -22,6 +43,8 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          glow: "hsl(var(--primary-glow))",
+          deep: "hsl(var(--primary-deep))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
