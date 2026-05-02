@@ -1,5 +1,5 @@
-import { Link, useParams } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { useMemo, useState, useEffect } from "react";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
 import { categories, getCategory, formatPrice } from "@/data/catalog";
@@ -7,8 +7,21 @@ import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 
 const CategoryDetail = () => {
   const { categoryId = "" } = useParams();
+  const navigate = useNavigate();
   const category = getCategory(categoryId);
-  const [selectedId, setSelectedId] = useState(category?.styles[0]?.id ?? "");
+  
+  // 1. Iniciamos el estado vacío
+  const [selectedId, setSelectedId] = useState("");
+
+// 2. NUEVO: Forzar scroll arriba y resetear diseño
+  useEffect(() => {
+    // Esta línea mágica obliga a la pantalla a ir a la posición más alta
+    window.scrollTo(0, 0);
+
+    if (category && category.styles.length > 0) {
+      setSelectedId(category.styles[0].id);
+    }
+  }, [category]);
 
   const selected = useMemo(
     () => category?.styles.find((s) => s.id === selectedId) ?? category?.styles[0],
@@ -51,7 +64,7 @@ const CategoryDetail = () => {
             <div className="order-1">
               <div className="relative aspect-[5/4] overflow-hidden bg-surface shadow-elegant rounded-md">
                 <img
-                  key={selected.imageUrl}
+                  key={selected.id} // CORREGIDO: Usar el ID fuerza a que la imagen y animación recarguen
                   src={selected.imageUrl}
                   alt={`${category.name} – ${selected.name}`}
                   className="h-full w-full object-cover fade-in"
@@ -120,9 +133,9 @@ const CategoryDetail = () => {
                 <a href="#contact" className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground text-xs uppercase tracking-[0.3em] hover:bg-primary-glow transition-colors rounded font-semibold">
                   Consultar disponibilidad
                 </a>
-                <Link to="/" className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-foreground/70 hover:text-primary">
-                  <ArrowLeft className="h-4 w-4" /> Volver al catálogo
-                </Link>
+<button onClick={() => navigate("/")} className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-foreground/70 hover:text-primary transition-colors cursor-pointer">
+  <ArrowLeft className="h-4 w-4" /> Volver al catálogo
+</button>
               </div>
             </div>
           </div>
@@ -202,11 +215,11 @@ const StyleGrid = ({
               {s.name}
             </div>
             <span
-              className="absolute top-1.5 left-1.5 h-3.5 w-3.5 rounded-full ring-2 ring-background"
+              className="absolute top-1.5 left-1.5 h-3.5 w-3.5 rounded-full ring-2 ring-background shadow-sm"
               style={{ background: s.swatch }}
             />
             {active && (
-              <span className="absolute top-1.5 right-1.5 h-5 w-5 rounded-full bg-primary text-primary-foreground flex items-center justify-center">
+              <span className="absolute top-1.5 right-1.5 h-5 w-5 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-sm">
                 <Check className="h-3 w-3" />
               </span>
             )}

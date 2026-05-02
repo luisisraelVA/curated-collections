@@ -1,29 +1,9 @@
 // =====================================================================
 // MUEBLERÍA TOKIO — Catálogo de productos
-// ---------------------------------------------------------------------
-// 👉 Para reemplazar las imágenes con tus propias URLs:
-//    Cambia el valor de `imageUrl` en cada estilo (ej: "/images/cat1-estilo1.jpg").
-//    Cada categoría es un "producto" con varias variaciones de estilo.
 // =====================================================================
 
+// Mantenemos heroLiving por si lo usa el componente Home para el fondo principal
 import heroLiving from "@/assets/hero-living.jpg";
-
-import aresFabric from "@/assets/ares-fabric.jpg";
-import aresVelvet from "@/assets/ares-velvet.jpg";
-import aresLeather from "@/assets/ares-leather.jpg";
-import heraLinen from "@/assets/hera-linen.jpg";
-import heraVelvet from "@/assets/hera-velvet.jpg";
-import atlasLeather from "@/assets/atlas-leather.jpg";
-import atlasVelvet from "@/assets/atlas-velvet.jpg";
-import orionMarble from "@/assets/orion-marble.jpg";
-import orionWood from "@/assets/orion-wood.jpg";
-import lunaBoucle from "@/assets/luna-boucle.jpg";
-import lunaVelvet from "@/assets/luna-velvet.jpg";
-import heliosBrass from "@/assets/helios-brass.jpg";
-import heliosBlack from "@/assets/helios-black.jpg";
-import vestaWalnut from "@/assets/vesta-walnut.jpg";
-import vestaOak from "@/assets/vesta-oak.jpg";
-
 export { heroLiving };
 
 /* ---------- Tipos ---------- */
@@ -31,7 +11,7 @@ export type Style = {
   id: string;
   name: string;
   swatch: string;          // color del chip (hex/HSL/css color)
-  imageUrl: string;        // 👉 reemplazar con tu URL: ej "/images/cat1-estilo1.jpg"
+  imageUrl: string;        // Ruta de la imagen en public/
 };
 
 export type Category = {
@@ -49,30 +29,6 @@ export const CURRENCY = "Bs.";
 export const formatPrice = (n: number) =>
   `${n.toLocaleString("es-BO")} ${CURRENCY}`;
 
-/* ---------- Pool de imágenes placeholder (reemplazar) ---------- */
-const POOL = [
-  aresFabric, aresVelvet, aresLeather,
-  heraLinen, heraVelvet,
-  atlasLeather, atlasVelvet,
-  orionMarble, orionWood,
-  lunaBoucle, lunaVelvet,
-  heliosBrass, heliosBlack,
-  vestaWalnut, vestaOak,
-];
-const pick = (i: number) => POOL[i % POOL.length];
-
-/* ---------- Helper para generar variaciones ---------- */
-const makeStyles = (
-  prefix: string,
-  variants: { name: string; swatch: string }[],
-): Style[] =>
-  variants.map((v, i) => ({
-    id: `${prefix}-${i + 1}`,
-    name: v.name,
-    swatch: v.swatch,
-    imageUrl: pick(prefix.charCodeAt(0) + i), // placeholder — reemplazar
-  }));
-
 /* ---------- Categorías (9) ---------- */
 export const categories: Category[] = [
   {
@@ -82,23 +38,23 @@ export const categories: Category[] = [
     price: 6800,
     description:
       "Sofás seccionales en \"L\", incluye cojines, mesa de centro y puffs. Tapicería premium, estructura reforzada y confort de larga duración.",
-    coverImage: aresFabric,
-    styles: makeStyles("L", [
-      { name: "Lino Crema",          swatch: "#E8DCC4" },
-      { name: "Terciopelo Esmeralda", swatch: "#0F6E5A" },
-      { name: "Cuero Coñac",          swatch: "#8B4A2B" },
-      { name: "Gris Pizarra",         swatch: "#3F4750" },
-      { name: "Beige Arena",          swatch: "#C9B79A" },
-      { name: "Azul Petróleo",        swatch: "#1F3D4A" },
-      { name: "Camel Tostado",        swatch: "#A8743E" },
-      { name: "Verde Oliva",          swatch: "#566B3A" },
-      { name: "Tabaco Profundo",      swatch: "#6B3A1E" },
-      { name: "Negro Ébano",          swatch: "#171717" },
-      { name: "Marfil Suave",         swatch: "#F1E7D2" },
-      { name: "Burdeos",              swatch: "#6E1A2E" },
-      { name: "Mostaza Dorado",       swatch: "#C9962E" },
-      { name: "Topo Cálido",          swatch: "#897063" },
-    ]),
+    coverImage: "/Muebles/completo1.jpeg",
+   styles: [
+      { id: "L-1", name: "Beige y Esmeralda", swatch: "#0A5C45", imageUrl: "/Muebles/completo1.jpeg" },
+      { id: "L-2", name: "Arena y Carmesí", swatch: "#A62B2B", imageUrl: "/Muebles/completo2.jpeg" },
+      { id: "L-3", name: "Beige y Naranja Cálido", swatch: "#D35400", imageUrl: "/Muebles/completo3.jpeg" },
+      { id: "L-4", name: "Arena con Sillón Rojo", swatch: "#C0392B", imageUrl: "/Muebles/completo4.jpeg" },
+      { id: "L-5", name: "Beige y Celeste", swatch: "#3498DB", imageUrl: "/Muebles/completo5.jpeg" },
+      { id: "L-6", name: "Azul Denim y Rojo", swatch: "#4A6984", imageUrl: "/Muebles/completo6.jpeg" },
+      { id: "L-7", name: "Beige con Sillón Marrón", swatch: "#6E4B3A", imageUrl: "/Muebles/completo7.jpeg" },
+      { id: "L-8", name: "Azul Marino y Amarillo", swatch: "#1A2530", imageUrl: "/Muebles/completo8.jpeg" },
+      { id: "L-9", name: "Gris Plata y Turquesa", swatch: "#5B7485", imageUrl: "/Muebles/completo9.jpeg" },
+      { id: "L-10", name: "Beige Clásico y Madera", swatch: "#D4C8B8", imageUrl: "/Muebles/completo10.jpeg" },
+      { id: "L-11", name: "Arena y Verde Botánico", swatch: "#1E4D2B", imageUrl: "/Muebles/completo11.jpeg" },
+      { id: "L-12", name: "Marfil y Rojo Pasión", swatch: "#F0EAD6", imageUrl: "/Muebles/completo12.jpeg" },
+      { id: "L-13", name: "Beige y Verde Tropical", swatch: "#82937A", imageUrl: "/Muebles/completo13.jpeg" },
+      { id: "L-14", name: "Beige con Sillón Naranja", swatch: "#E67E22", imageUrl: "/Muebles/completo14.jpeg" },
+    ],
   },
   {
     id: "salas-esquineras",
@@ -107,16 +63,16 @@ export const categories: Category[] = [
     price: 7800,
     description:
       "Salas modulares grandes tipo U con accesorios integrados como repisas y puffs. Ideal para espacios amplios y reuniones familiares prolongadas.",
-    coverImage: heraLinen,
-    styles: makeStyles("U", [
-      { name: "Gris Carbón",      swatch: "#2E3338" },
-      { name: "Beige Lino",       swatch: "#D7C8AE" },
-      { name: "Verde Bosque",     swatch: "#1F4233" },
-      { name: "Azul Medianoche",  swatch: "#1B2A4E" },
-      { name: "Camel Suave",      swatch: "#B98C5C" },
-      { name: "Topo Elegante",    swatch: "#7A6B5D" },
-      { name: "Negro Mate",       swatch: "#0F0F11" },
-    ]),
+    coverImage: "/Muebles2/esquinero1.jpeg",
+    styles: [
+      { id: "U-1", name: "Gris Claro y Azul", swatch: "#B8BCBE", imageUrl: "/Muebles2/esquinero1.jpeg" },
+      { id: "U-2", name: "Gris y Carmesí", swatch: "#82858A", imageUrl: "/Muebles2/esquinero2.jpeg" },
+      { id: "U-3", name: "Azul Marino y Mostaza", swatch: "#25345C", imageUrl: "/Muebles2/esquinero3.jpeg" },
+      { id: "U-4", name: "Gris Perla y Azul Rey", swatch: "#C4C6C8", imageUrl: "/Muebles2/esquinero4.jpeg" },
+      { id: "U-5", name: "Bicolor Gris y Ceniza", swatch: "#566471", imageUrl: "/Muebles2/esquinero5.jpeg" },
+      { id: "U-6", name: "Gris Plata y Azul", swatch: "#A2A5AA", imageUrl: "/Muebles2/esquinero6.jpeg" },
+      { id: "U-7", name: "Gris Carbón y Amarillo", swatch: "#2A2D34", imageUrl: "/Muebles2/esquinero7.jpeg" },
+    ],
   },
   {
     id: "poltronas-individuales",
@@ -125,17 +81,18 @@ export const categories: Category[] = [
     price: 900,
     description:
       "Diseño curvo, tela aterciopelada de alta calidad, patas de madera natural. Pieza de acento ideal para complementar living, dormitorio o estudio.",
-    coverImage: atlasVelvet,
-    styles: makeStyles("P", [
-      { name: "Verde Esmeralda",  swatch: "#0F6E5A" },
-      { name: "Rosa Antiguo",     swatch: "#C29390" },
-      { name: "Azul Cobalto",     swatch: "#1E3F8A" },
-      { name: "Mostaza Vintage",  swatch: "#C9962E" },
-      { name: "Gris Topo",        swatch: "#7A6B5D" },
-      { name: "Crema Marfil",     swatch: "#F1E7D2" },
-      { name: "Burdeos Profundo", swatch: "#6E1A2E" },
-      { name: "Negro Aterciopelado", swatch: "#171717" },
-    ]),
+    coverImage: "/Muebles3/silla1.jpeg",
+    styles: [
+      { id: "P-1", name: "Rosa Palo", swatch: "#D89A9E", imageUrl: "/Muebles3/silla1.jpeg" },
+      { id: "P-2", name: "Negro Profundo", swatch: "#1F1F1F", imageUrl: "/Muebles3/silla2.jpeg" },
+      { id: "P-3", name: "Azul Rey", swatch: "#1A3673", imageUrl: "/Muebles3/silla3.jpeg" },
+      { id: "P-4", name: "Rojo Carmesí", swatch: "#A61922", imageUrl: "/Muebles3/silla4.jpeg" },
+      { id: "P-5", name: "Azul con Cojín", swatch: "#0B265E", imageUrl: "/Muebles3/silla5.jpeg" },
+      { id: "P-6", name: "Blanco Perla (Set 4)", swatch: "#EFEFEF", imageUrl: "/Muebles3/silla6.jpeg" },
+      { id: "P-7", name: "Blanco Marfil", swatch: "#FAFAFA", imageUrl: "/Muebles3/silla7.jpeg" },
+      { id: "P-8", name: "Amarillo Mostaza", swatch: "#DCA71B", imageUrl: "/Muebles3/silla8.jpeg" },
+      { id: "P-9", name: "Turquesa Vivo", swatch: "#009C9C", imageUrl: "/Muebles3/silla9.jpeg" },
+    ],
   },
   {
     id: "sillones-orejeros",
@@ -144,13 +101,13 @@ export const categories: Category[] = [
     price: 1300,
     description:
       "Diseño clásico de acento, respaldo alto capitoné, brazos curvados y tela aterciopelada. Una pieza atemporal que aporta carácter y elegancia.",
-    coverImage: lunaVelvet,
-    styles: makeStyles("O", [
-      { name: "Burdeos Real",     swatch: "#6E1A2E" },
-      { name: "Verde Botánico",   swatch: "#2A5240" },
-      { name: "Azul Marino",      swatch: "#1B2A4E" },
-      { name: "Gris Plomo",       swatch: "#4A4F55" },
-    ]),
+    coverImage: "/Muebles4/Asilla1.jpeg",
+    styles: [
+      { id: "O-1", name: "Celeste Vibrante", swatch: "#00BFFF", imageUrl: "/Muebles4/Asilla1.jpeg" },
+      { id: "O-2", name: "Amarillo Sol", swatch: "#FFD700", imageUrl: "/Muebles4/Asilla2.jpeg" },
+      { id: "O-3", name: "Gris Perla Azulado", swatch: "#A9B0B8", imageUrl: "/Muebles4/Asilla3.jpeg" },
+      { id: "O-4", name: "Fucsia Real", swatch: "#E0115F", imageUrl: "/Muebles4/Asilla4.jpeg" },
+    ],
   },
   {
     id: "sofas-cama",
@@ -159,13 +116,13 @@ export const categories: Category[] = [
     price: 2000,
     description:
       "Diseño funcional clic-clac sin brazos, acolchado capitoné en cuadros. Convierte cualquier ambiente en una habitación de huéspedes en segundos.",
-    coverImage: heraVelvet,
-    styles: makeStyles("F", [
-      { name: "Gris Pizarra",   swatch: "#3F4750" },
-      { name: "Beige Cálido",   swatch: "#C9B79A" },
-      { name: "Azul Denim",     swatch: "#3A5A7A" },
-      { name: "Verde Salvia",   swatch: "#7A8B6E" },
-    ]),
+    coverImage: "/Muebles5/sofa1.jpeg",
+    styles: [
+      { id: "F-1", name: "Azul Rey", swatch: "#0000CD", imageUrl: "/Muebles5/sofa1.jpeg" },
+      { id: "F-2", name: "Gris Oscuro Antracita", swatch: "#36454F", imageUrl: "/Muebles5/sofa2.jpeg" },
+      { id: "F-3", name: "Beige Capitoné", swatch: "#D3D3CB", imageUrl: "/Muebles5/sofa3.jpeg" },
+      { id: "F-4", name: "Gris Claro Liso", swatch: "#DCDCDC", imageUrl: "/Muebles5/sofa4.jpeg" },
+    ],
   },
   {
     id: "mecedoras",
@@ -174,12 +131,12 @@ export const categories: Category[] = [
     price: 1500,
     description:
       "Respaldo alto, base curva de madera para balanceo suave, detalles en capitoné. Confort terapéutico con estética premium.",
-    coverImage: atlasLeather,
-    styles: makeStyles("M", [
-      { name: "Nogal & Beige",  swatch: "#6B3A20" },
-      { name: "Roble & Gris",   swatch: "#A8814E" },
-      { name: "Ébano & Negro",  swatch: "#0E0E10" },
-    ]),
+    coverImage: "/Muebles6/Mesedora1.jpeg",
+    styles: [
+      { id: "M-1", name: "Gris Texturizado", swatch: "#8A8D8F", imageUrl: "/Muebles6/Mesedora1.jpeg" },
+      { id: "M-2", name: "Blanco Marfil", swatch: "#F4F4F0", imageUrl: "/Muebles6/Mesedora2.jpeg" },
+      { id: "M-3", name: "Gris Plomo Oscuro", swatch: "#606263", imageUrl: "/Muebles6/Mesedora3.jpeg" },
+    ],
   },
   {
     id: "sofas-modulares-premium",
@@ -188,11 +145,11 @@ export const categories: Category[] = [
     price: 4800,
     description:
       "Textura tipo bouclé, líneas curvas, completamente tapizado, incluye ottoman y cojines. Una declaración escultórica de confort contemporáneo.",
-    coverImage: lunaBoucle,
-    styles: makeStyles("S", [
-      { name: "Bouclé Arena",   swatch: "#D9C7A2" },
-      { name: "Bouclé Marfil",  swatch: "#F1E7D2" },
-    ]),
+    coverImage: "/Muebles7/tapisado1.jpeg",
+    styles: [
+      { id: "S-1", name: "Bouclé Marfil (Set 1)", swatch: "#F1E7D2", imageUrl: "/Muebles7/tapisado1.jpeg" },
+      { id: "S-2", name: "Bouclé Marfil (Set 2)", swatch: "#E8DCC4", imageUrl: "/Muebles7/tapisado2.jpeg" },
+    ],
   },
   {
     id: "comedores-elegantes",
@@ -201,12 +158,12 @@ export const categories: Category[] = [
     price: 8000,
     description:
       "Mesas con cubierta de vidrio, bases modernas, sillas tapizadas de respaldo alto para 6 a 8 personas. Geometría limpia para anfitriones exigentes.",
-    coverImage: orionMarble,
-    styles: makeStyles("C", [
-      { name: "Vidrio & Negro",  swatch: "#0F0F11" },
-      { name: "Vidrio & Bronce", swatch: "#B08A4A" },
-      { name: "Vidrio & Blanco", swatch: "#EDEAE3" },
-    ]),
+    coverImage: "/Muebles8/comedor1.jpeg",
+    styles: [
+      { id: "C-1", name: "Base Nogal y Crema", swatch: "#E5DFD3", imageUrl: "/Muebles8/comedor1.jpeg" },
+      { id: "C-2", name: "Sillas Blancas Lino", swatch: "#EAE8E3", imageUrl: "/Muebles8/comedor2.jpeg" },
+      { id: "C-3", name: "Sillas Marrón Oscuro", swatch: "#3A2A22", imageUrl: "/Muebles8/comedor3.jpeg" },
+    ],
   },
   {
     id: "comedores-premium-madera",
@@ -215,13 +172,13 @@ export const categories: Category[] = [
     price: 8800,
     description:
       "Diseño robusto para 8 personas, madera maciza con centros de vidrio, sillas con asiento tapizado. Una mesa hecha para reunir generaciones.",
-    coverImage: orionWood,
-    styles: makeStyles("W", [
-      { name: "Nogal Natural",   swatch: "#6B3A20" },
-      { name: "Roble Claro",     swatch: "#A8814E" },
-      { name: "Cerezo Oscuro",   swatch: "#5A2418" },
-      { name: "Roble Negro",     swatch: "#0E0E10" },
-    ]),
+    coverImage: "/Muebles9/Acomedor1.jpeg",
+    styles: [
+      { id: "W-1", name: "Nogal Sillas Curvas", swatch: "#4A3018", imageUrl: "/Muebles9/Acomedor1.jpeg" },
+      { id: "W-2", name: "Roble Sillas Caladas", swatch: "#3E2723", imageUrl: "/Muebles9/Acomedor2.jpeg" },
+      { id: "W-3", name: "Caoba Oscura Recta", swatch: "#2D1A11", imageUrl: "/Muebles9/Acomedor3.jpeg" },
+      { id: "W-4", name: "Roble Respaldo Sólido", swatch: "#5C3A21", imageUrl: "/Muebles9/Acomedor4.jpeg" },
+    ],
   },
 ];
 

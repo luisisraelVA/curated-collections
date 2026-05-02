@@ -10,10 +10,21 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/60">
       <div className="container-luxe flex items-center justify-between py-4">
-        <Link to="/" className="flex items-baseline gap-2 group">
-          <span className="font-display font-bold text-2xl md:text-[1.6rem] tracking-tight text-foreground group-hover:text-primary transition-colors">
-            Mueblería <span className="text-primary">Tokio</span>
-          </span>
+        
+<Link to="/" className="flex items-center gap-3 group">
+          <img 
+            src="/logo-tokio.svg" 
+            alt="Logo MT" 
+            className="h-10 md:h-12 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity" 
+          />
+          <div className="flex flex-col justify-center border-l border-border/50 pl-3">
+            <span className="font-display font-semibold text-lg md:text-xl tracking-[0.15em] text-foreground group-hover:text-primary transition-colors leading-none">
+              MUEBLERÍA
+            </span>
+            <span className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-primary mt-1.5 leading-none font-medium">
+              Tokio
+            </span>
+          </div>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8 text-xs uppercase tracking-[0.2em] font-medium">
