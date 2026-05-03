@@ -3,21 +3,17 @@ import { useMemo, useState, useEffect } from "react";
 import Header from "@/components/site/Header";
 import Footer from "@/components/site/Footer";
 import { categories, getCategory, formatPrice } from "@/data/catalog";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Phone } from "lucide-react";
 
 const CategoryDetail = () => {
   const { categoryId = "" } = useParams();
   const navigate = useNavigate();
   const category = getCategory(categoryId);
   
-  // 1. Iniciamos el estado vacío
   const [selectedId, setSelectedId] = useState("");
 
-// 2. NUEVO: Forzar scroll arriba y resetear diseño
   useEffect(() => {
-    // Esta línea mágica obliga a la pantalla a ir a la posición más alta
     window.scrollTo(0, 0);
-
     if (category && category.styles.length > 0) {
       setSelectedId(category.styles[0].id);
     }
@@ -27,6 +23,21 @@ const CategoryDetail = () => {
     () => category?.styles.find((s) => s.id === selectedId) ?? category?.styles[0],
     [category, selectedId],
   );
+
+  // FUNCIÓN PARA COTIZAR POR WHATSAPP (A tu número de ventas 73159744)
+const handleCotizarWhatsApp = () => {
+  if (!category || !selected) return;
+  
+  const numeroVentas = "59173159744";
+  
+  // Obtenemos la URL completa de la imagen (necesaria para la vista previa)
+  const fullImageUrl = window.location.origin + selected.imageUrl;
+  
+  // Construimos el mensaje incluyendo el link de la foto al final
+  const mensaje = `Hola!%20Quisiera%20consultar%20la%20disponibilidad%20del%20producto:%20*${category.name}*%0A%0A*Diseño:*%20${selected.name}%0A*Precio:*%20${formatPrice(category.price)}%0A%0A*Foto%20del%20modelo:*%20${fullImageUrl}%0A%0A¿Tienen%20stock%20disponible?`;
+  
+  window.open(`https://wa.me/${numeroVentas}?text=${mensaje}`, '_blank');
+};
 
   if (!category || !selected) {
     return (
@@ -58,13 +69,12 @@ const CategoryDetail = () => {
             <span className="text-foreground">{category.name}</span>
           </div>
 
-          {/* Layout: en móviles -> imagen, selector, info. En desktop -> imagen | info */}
           <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-16 items-start">
             {/* IMAGEN PRINCIPAL */}
             <div className="order-1">
               <div className="relative aspect-[5/4] overflow-hidden bg-surface shadow-elegant rounded-md">
                 <img
-                  key={selected.id} // CORREGIDO: Usar el ID fuerza a que la imagen y animación recarguen
+                  key={selected.id}
                   src={selected.imageUrl}
                   alt={`${category.name} – ${selected.name}`}
                   className="h-full w-full object-cover fade-in"
@@ -77,7 +87,7 @@ const CategoryDetail = () => {
                 </div>
               </div>
 
-              {/* Selector de diseños — en móvil aparece justo debajo de la imagen */}
+              {/* Selector móvil */}
               <div className="mt-8 lg:hidden">
                 <StyleGrid
                   styles={category.styles}
@@ -120,7 +130,7 @@ const CategoryDetail = () => {
                 </div>
               </div>
 
-              {/* Selector de diseños — desktop */}
+              {/* Selector desktop */}
               <div className="mt-10 hidden lg:block">
                 <StyleGrid
                   styles={category.styles}
@@ -129,13 +139,18 @@ const CategoryDetail = () => {
                 />
               </div>
 
-              <div className="mt-10 flex flex-wrap items-center gap-4">
-                <a href="#contact" className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground text-xs uppercase tracking-[0.3em] hover:bg-primary-glow transition-colors rounded font-semibold">
-                  Consultar disponibilidad
-                </a>
-<button onClick={() => navigate("/")} className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-foreground/70 hover:text-primary transition-colors cursor-pointer">
-  <ArrowLeft className="h-4 w-4" /> Volver al catálogo
-</button>
+              {/* BOTONES DE ACCIÓN */}
+              <div className="mt-10 flex flex-col gap-6">
+                <button 
+                  onClick={handleCotizarWhatsApp}
+                  className="w-full inline-flex items-center justify-center gap-3 px-8 py-5 bg-primary text-primary-foreground text-xs uppercase tracking-[0.3em] hover:bg-primary-glow transition-all rounded font-bold shadow-lg active:scale-[0.98]"
+                >
+                  <Phone className="h-4 w-4" /> Consultar Disponibilidad
+                </button>
+                
+                <button onClick={() => navigate("/")} className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-foreground/70 hover:text-primary transition-colors cursor-pointer justify-center md:justify-start">
+                  <ArrowLeft className="h-4 w-4" /> Volver al catálogo
+                </button>
               </div>
             </div>
           </div>
@@ -174,16 +189,8 @@ const CategoryDetail = () => {
   );
 };
 
-/* ---------- Selector reusable ---------- */
-const StyleGrid = ({
-  styles,
-  selectedId,
-  onSelect,
-}: {
-  styles: { id: string; name: string; swatch: string; imageUrl: string }[];
-  selectedId: string;
-  onSelect: (id: string) => void;
-}) => (
+/* ---------- StyleGrid Reusable ---------- */
+const StyleGrid = ({ styles, selectedId, onSelect }: any) => (
   <div>
     <div className="flex items-center justify-between mb-5">
       <div className="eyebrow">Selecciona un diseño</div>
@@ -193,22 +200,17 @@ const StyleGrid = ({
     </div>
 
     <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
-      {styles.map((s) => {
+      {styles.map((s: any) => {
         const active = s.id === selectedId;
         return (
           <button
             key={s.id}
             onClick={() => onSelect(s.id)}
-            aria-pressed={active}
-            aria-label={`Seleccionar diseño ${s.name}`}
             className={`group relative aspect-square overflow-hidden rounded-md border-2 transition-all duration-300 ${
-              active
-                ? "border-primary shadow-glow scale-[1.03]"
-                : "border-border hover:border-foreground/40"
+              active ? "border-primary shadow-glow scale-[1.03]" : "border-border hover:border-foreground/40"
             }`}
           >
-            <img src={s.imageUrl} alt={s.name} loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover" />
+            <img src={s.imageUrl} alt={s.name} className="absolute inset-0 h-full w-full object-cover" />
             <div className={`absolute inset-x-0 bottom-0 px-2 py-1.5 text-[10px] uppercase tracking-wider truncate ${
               active ? "bg-primary text-primary-foreground font-semibold" : "bg-background/80 text-foreground"
             }`}>
@@ -219,7 +221,7 @@ const StyleGrid = ({
               style={{ background: s.swatch }}
             />
             {active && (
-              <span className="absolute top-1.5 right-1.5 h-5 w-5 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-sm">
+              <span className="absolute top-1.5 right-1.5 h-5 w-5 rounded-full bg-primary text-primary-foreground flex items-center justify-center">
                 <Check className="h-3 w-3" />
               </span>
             )}
