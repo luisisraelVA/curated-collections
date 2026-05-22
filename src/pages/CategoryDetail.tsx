@@ -24,20 +24,16 @@ const CategoryDetail = () => {
     [category, selectedId],
   );
 
-  // FUNCIÓN PARA COTIZAR POR WHATSAPP (A tu número de ventas 73159744)
-const handleCotizarWhatsApp = () => {
-  if (!category || !selected) return;
-  
-  const numeroVentas = "59173159744";
-  
-  // Obtenemos la URL completa de la imagen (necesaria para la vista previa)
-  const fullImageUrl = window.location.origin + selected.imageUrl;
-  
-  // Construimos el mensaje incluyendo el link de la foto al final
-  const mensaje = `Hola!%20Quisiera%20consultar%20la%20disponibilidad%20del%20producto:%20*${category.name}*%0A%0A*Diseño:*%20${selected.name}%0A*Precio:*%20${formatPrice(category.price)}%0A%0A*Foto%20del%20modelo:*%20${fullImageUrl}%0A%0A¿Tienen%20stock%20disponible?`;
-  
-  window.open(`https://wa.me/${numeroVentas}?text=${mensaje}`, '_blank');
-};
+  const handleCotizarWhatsApp = () => {
+    if (!category || !selected) return;
+    
+    const numeroVentas = "59173159744";
+    const fullImageUrl = window.location.origin + selected.imageUrl;
+    
+    const mensaje = `Hola!%20Quisiera%20consultar%20la%20disponibilidad%20del%20producto:%20*${category.name}*%0A%0A*Diseño:*%20${selected.name}%0A*Precio:*%20${formatPrice(category.price)}%0A%0A*Foto%20del%20modelo:*%20${fullImageUrl}%0A%0A¿Tienen%20stock%20disponible?`;
+    
+    window.open(`https://wa.me/${numeroVentas}?text=${mensaje}`, '_blank');
+  };
 
   if (!category || !selected) {
     return (
@@ -189,7 +185,7 @@ const handleCotizarWhatsApp = () => {
   );
 };
 
-/* ---------- StyleGrid Reusable ---------- */
+/* ---------- StyleGrid ---------- */
 const StyleGrid = ({ styles, selectedId, onSelect }: any) => (
   <div>
     <div className="flex items-center justify-between mb-5">

@@ -16,14 +16,12 @@ export default defineConfig(({ mode }) => ({
     mode === "development" && componentTagger()
   ].filter(Boolean),
   
-  // --- OPTIMIZACIÓN DE VELOCIDAD ---
   build: {
-    target: "esnext", // Usa JavaScript moderno (más rápido)
-    minify: "esbuild", // Compresión ultra rápida
-    cssMinify: true,   // Comprime el CSS al máximo
+    target: "esnext", 
+    minify: "esbuild", 
+    cssMinify: true,   
     rollupOptions: {
       output: {
-        // Divide el código en trozos pequeños para que cargue más rápido
         manualChunks(id) {
           if (id.includes('node_modules')) {
             return 'vendor';
@@ -31,7 +29,6 @@ export default defineConfig(({ mode }) => ({
         },
       },
     },
-    // Elimina console.logs en producción para ganar milisegundos
     terserOptions: mode === "production" ? {
       compress: {
         drop_console: true,
@@ -39,7 +36,6 @@ export default defineConfig(({ mode }) => ({
       },
     } : undefined,
   },
-  // ---------------------------------
 
   resolve: {
     alias: {

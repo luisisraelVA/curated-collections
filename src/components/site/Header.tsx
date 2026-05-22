@@ -90,7 +90,6 @@ const Header = () => {
             <a href="#contact" onClick={() => setOpen(false)} className="text-foreground/80 hover:text-primary">Contacto</a>
             
             <div className="flex justify-between items-center pt-4 border-t border-border/50">
-              {/* TU NÚMERO DE VENTAS AQUÍ */}
               <a href="tel:+59173159744" className="flex items-center gap-2 text-primary font-bold">
                 <Phone className="h-4 w-4" /> LLAMAR AHORA
               </a>
